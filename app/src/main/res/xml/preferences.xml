@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <EditTextPreference
+        app:key="password"
+        app:summary="@string/set_admin_password"
+        app:title="@string/password"/>
+
+    <Preference
+        app:key="create_report"
+        app:summary="@string/create_report_of_customer_data"
+        app:title="@string/create_report"/>
+
+    <PreferenceCategory
+        app:key="data_category"
+        app:title="@string/data">
+
+        <Preference
+            app:key="customer"
+            app:summary="@string/add_update_or_remove_customers"
+            app:title="@string/customer"/>
+
+        <Preference
+            app:key="product"
+            app:summary="@string/add_update_or_remove_products"
+            app:title="@string/products"/>
+
+        <Preference
+            app:key="transaction"
+            app:summary="@string/manage_transactions"
+            app:title="@string/transactions"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:key="backup_category"
+        app:title="@string/backup">
+
+        <Preference
+            app:key="create_backup"
+            app:title="@string/create_backup"
+            app:summary="@string/create_backup_of_customers_products_transactions"/>
+
+        <Preference
+            app:key="restore_backup"
+            app:title="@string/restore_backup"
+            app:summary="@string/restore_customers_products_transaction"/>
+    </PreferenceCategory>
+
+</PreferenceScreen>

@@ -3,4 +3,20 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="data">Data</string>
+    <string name="add_update_or_remove_customers">Add, update or remove customers</string>
+    <string name="customer">Customer</string>
+    <string name="add_update_or_remove_products">Add, update or remove products</string>
+    <string name="manage_transactions">Manage transactions</string>
+    <string name="products">Products</string>
+    <string name="transactions">Transactions</string>
+    <string name="backup">Backup</string>
+    <string name="create_backup">Create Backup</string>
+    <string name="restore_backup">Restore Backup</string>
+    <string name="create_report">Create Report</string>
+    <string name="create_report_of_customer_data">Create a report of customer data</string>
+    <string name="password">Password</string>
+    <string name="set_admin_password">Set admin password to access this screen</string>
+    <string name="create_backup_of_customers_products_transactions">Create backup of customers, products, transactions</string>
+    <string name="restore_customers_products_transaction">Restore customers, products, transactions</string>
 </resources>

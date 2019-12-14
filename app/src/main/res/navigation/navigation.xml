@@ -13,10 +13,18 @@
         <action
             android:id="@+id/action_customerFragment_to_productFragment"
             app:destination="@id/productFragment" />
+        <action
+            android:id="@+id/action_customerFragment_to_preferenceFragment"
+            app:destination="@id/preferenceFragment" />
     </fragment>
     <fragment
         android:id="@+id/productFragment"
         android:name="com.rynkbit.coffeebank.ui.product.ProductFragment"
         android:label="fragment_product"
         tools:layout="@layout/fragment_product" />
+    <fragment
+        android:id="@+id/preferenceFragment"
+        android:name="com.rynkbit.coffeebank.ui.preference.PreferenceFragment"
+        android:label="fragment_preference"
+        tools:layout="@layout/fragment_preference" />
 </navigation>

@@ -40,6 +40,7 @@ class CustomerFragment : Fragment() {
 
         createCustomerAdapter()
         setupCustomerList()
+        setupSettingsButton()
     }
 
     override fun onResume() {
@@ -56,6 +57,11 @@ class CustomerFragment : Fragment() {
             .subscribe()
     }
 
+    private fun createCustomerAdapter() {
+        customerAdapter = CustomerAdapter()
+        customerAdapter.onClickListener = onCustomerClick()
+    }
+
     private fun setupCustomerList() {
         listCustomer.layoutManager = ResponsiveStaggeredGridLayoutManager(
             context!!, LinearLayoutManager.VERTICAL
@@ -63,10 +69,14 @@ class CustomerFragment : Fragment() {
         listCustomer.adapter = customerAdapter
     }
 
-    private fun createCustomerAdapter() {
-        customerAdapter = CustomerAdapter()
-        customerAdapter.onClickListener = onCustomerClick()
+    private fun setupSettingsButton() {
+        fabSettings.setOnClickListener {
+            Navigation
+                .findNavController(activity!!, R.id.navhost)
+                .navigate(R.id.action_customerFragment_to_preferenceFragment)
+        }
     }
+
 
     private fun onCustomerClick(): ((Customer) -> Unit)? = {customer ->
         customerProductViewModel.customer = customer
