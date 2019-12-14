@@ -9,6 +9,7 @@ import io.reactivex.schedulers.Schedulers
 class CustomerFacade(
     val appDatabase: AppDatabase
 ) {
+
     fun createTestData(){
         val customers = mutableListOf<Customer>()
 
