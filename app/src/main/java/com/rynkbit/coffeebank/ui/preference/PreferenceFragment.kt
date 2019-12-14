@@ -21,5 +21,15 @@ class PreferenceFragment : PreferenceFragmentCompat() {
                     .navigate(R.id.action_preferenceFragment_to_CRUDCustomerFragment)
                 return@setOnPreferenceClickListener true
             }
+
+
+        findPreference<Preference>("product")
+            ?.setOnPreferenceClickListener {
+                Navigation.findNavController(activity!!, R.id.navhost)
+                    .navigate(R.id.action_preferenceFragment_to_CRUDProductFragment)
+                return@setOnPreferenceClickListener true
+            }
+
+
     }
 }

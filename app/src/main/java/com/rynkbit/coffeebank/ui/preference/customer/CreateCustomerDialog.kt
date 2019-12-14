@@ -14,7 +14,6 @@ class CreateCustomerDialog(context: Context?) : AlertDialog(context) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setTitle(R.string.add_customer)
         setContentView(R.layout.dialog_add_customer)
 
         val editFirstname: EditText = findViewById(R.id.editFirstname)

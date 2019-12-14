@@ -36,6 +36,12 @@ class CRUDCustomerFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        setupCustomerAdapter()
+        setupCustomerList()
+        setupAddButton()
+    }
+
+    private fun setupCustomerAdapter() {
         crudCustomerAdapter = CRUDCustomerAdapter()
         crudCustomerAdapter.onCustomerChange =
             CustomerFacade(AppDatabase.getInstance(context!!))
@@ -47,14 +53,12 @@ class CRUDCustomerFragment : Fragment() {
                     updateCustomerList()
                 }
         }
-
-        setupCustomerList()
-        setupAddButton()
     }
 
     private fun setupAddButton() {
         fabAdd.setOnClickListener {
             val dialog = CreateCustomerDialog(context)
+            dialog.setTitle(R.string.add_customer)
             dialog.setOnDismissListener { updateCustomerList() }
             dialog.show()
         }

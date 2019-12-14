@@ -30,4 +30,10 @@
     <string name="confirm_customer_delete">Delete customer %1$s %2$s?</string>
     <string name="save">Save</string>
     <string name="add_customer">Add Customer</string>
+    <string name="price">Price</string>
+    <string name="stock">Stock</string>
+    <string name="hint_price">0.00</string>
+    <string name="hint_stock">0</string>
+    <string name="confirm_product_delete">Delete product %1$s?</string>
+    <string name="add_product">Add Product</string>
 </resources>

@@ -11,23 +11,33 @@ class CustomerFacade(
     val appDatabase: AppDatabase
 ) {
 
+    companion object {
+        var customerTestDataCreated = false
+    }
+
     fun createTestData(){
-        val customers = mutableListOf<Customer>()
+        if(!customerTestDataCreated) {
+            val customers = mutableListOf<Customer>()
 
-        for(i in 1..3){
-            customers.add(Customer(
-                uid = 0,
-                firstname = "Tester $i",
-                lastname = "Testing $i",
-                balance = i * 1.37
-            ))
+            for (i in 1..3) {
+                customers.add(
+                    Customer(
+                        uid = 0,
+                        firstname = "Tester $i",
+                        lastname = "Testing $i",
+                        balance = i * 1.37
+                    )
+                )
+            }
+
+            appDatabase
+                .customerDao()
+                .insertAll(*customers.toTypedArray())
+                .subscribeOn(Schedulers.newThread())
+                .subscribe()
+
+            customerTestDataCreated = true
         }
-
-        appDatabase
-            .customerDao()
-            .insertAll(*customers.toTypedArray())
-            .subscribeOn(Schedulers.newThread())
-            .subscribe()
     }
 
     fun getAll(limit: Int, offset: Int): Maybe<List<Customer>> {
