@@ -77,7 +77,6 @@ class CustomerFragment : Fragment() {
         }
     }
 
-
     private fun onCustomerClick(): ((Customer) -> Unit)? = {customer ->
         customerProductViewModel.customer = customer
 

@@ -19,4 +19,15 @@
     <string name="set_admin_password">Set admin password to access this screen</string>
     <string name="create_backup_of_customers_products_transactions">Create backup of customers, products, transactions</string>
     <string name="restore_customers_products_transaction">Restore customers, products, transactions</string>
+    <string name="name">Name</string>
+    <string name="balance">Balance</string>
+    <string name="id">ID</string>
+    <string name="hint_balance">0.00</string>
+    <string name="remove">Remove</string>
+    <string name="firstname">Firstname</string>
+    <string name="lastname">Lastname</string>
+    <string name="delete">Delete</string>
+    <string name="confirm_customer_delete">Delete customer %1$s %2$s?</string>
+    <string name="save">Save</string>
+    <string name="add_customer">Add Customer</string>
 </resources>

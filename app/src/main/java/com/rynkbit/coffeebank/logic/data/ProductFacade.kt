@@ -9,7 +9,7 @@ class ProductFacade(val appDatabase: AppDatabase) {
     fun createTestData() {
         val products = mutableListOf<Product>()
 
-        for (i in 1..10000) {
+        for (i in 1..3) {
             products.add(
                 Product(
                     uid = 0,
