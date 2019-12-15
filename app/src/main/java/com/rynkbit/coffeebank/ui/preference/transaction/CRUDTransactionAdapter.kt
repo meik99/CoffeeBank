@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.rynkbit.coffeebank.R
 import com.rynkbit.coffeebank.db.entitiy.Product
 import com.rynkbit.coffeebank.db.entitiy.Transaction
+import java.math.BigDecimal
+import java.math.RoundingMode
 import java.text.DateFormat
 import java.text.NumberFormat
 import java.util.*
@@ -46,8 +48,9 @@ class CRUDTransactionAdapter : RecyclerView.Adapter<CRUDTransactionAdapter.ViewH
         holder.txtProduct.text = transaction.productName
         holder.txtPrice.text =
             NumberFormat
-                .getCurrencyInstance(Locale.getDefault())
-                .format(transaction.productPrice)
+                .getNumberInstance(Locale.getDefault())
+                .format(
+                    BigDecimal(transaction.productPrice ?: 0.0).setScale(2, RoundingMode.HALF_UP))
         holder.btnRemove.setOnClickListener {
             showConfirmationDialog(it.context, transaction)
         }

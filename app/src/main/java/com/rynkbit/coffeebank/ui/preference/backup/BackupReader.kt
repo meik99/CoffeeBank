@@ -9,39 +9,49 @@ import com.rynkbit.coffeebank.logic.data.ProductFacade
 import com.rynkbit.coffeebank.logic.data.TransactionFacade
 import java.io.BufferedReader
 import java.io.InputStreamReader
+import java.lang.Exception
+import java.lang.IllegalStateException
 
 class BackupReader (val context: Context) {
-    fun read(uri: Uri){
+    fun read(uri: Uri): Boolean {
         context.contentResolver.openInputStream(uri)?.let {inputStream ->
-            val reader = BufferedReader(InputStreamReader(inputStream))
-            val backup = Gson()
-                .fromJson<Backup?>(reader, Backup::class.java)
+            try {
 
-            backup?.let {
-                TransactionFacade(AppDatabase.getInstance(context))
-                    .deleteAll()
-                    .blockingGet()
+                val reader = BufferedReader(InputStreamReader(inputStream))
+                val backup = Gson()
+                    .fromJson<Backup?>(reader, Backup::class.java)
 
-                CustomerFacade(AppDatabase.getInstance(context))
-                    .deleteAll()
-                    .blockingGet()
+                backup?.let {
+                    TransactionFacade(AppDatabase.getInstance(context))
+                        .deleteAll()
+                        .blockingGet()
 
-                ProductFacade(AppDatabase.getInstance(context))
-                    .deleteAll()
-                    .blockingGet()
+                    CustomerFacade(AppDatabase.getInstance(context))
+                        .deleteAll()
+                        .blockingGet()
 
-                CustomerFacade(AppDatabase.getInstance(context))
-                    .insertAll(it.customers)
-                    .blockingGet()
+                    ProductFacade(AppDatabase.getInstance(context))
+                        .deleteAll()
+                        .blockingGet()
 
-                ProductFacade(AppDatabase.getInstance(context))
-                    .insertAll(it.products)
-                    .blockingGet()
+                    CustomerFacade(AppDatabase.getInstance(context))
+                        .insertAll(it.customers)
+                        .blockingGet()
 
-                TransactionFacade(AppDatabase.getInstance(context))
-                    .insertAll(it.transactions)
-                    .blockingGet()
+                    ProductFacade(AppDatabase.getInstance(context))
+                        .insertAll(it.products)
+                        .blockingGet()
+
+                    TransactionFacade(AppDatabase.getInstance(context))
+                        .insertAll(it.transactions)
+                        .blockingGet()
+
+                    return true
+                }
+            } catch (e: Exception){
             }
         }
+
+        return false
     }
 }

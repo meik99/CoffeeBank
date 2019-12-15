@@ -10,9 +10,11 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
+import com.google.android.material.snackbar.Snackbar
 import com.rynkbit.coffeebank.R
 import com.rynkbit.coffeebank.ui.preference.backup.BackupReader
 import com.rynkbit.coffeebank.ui.preference.backup.BackupWriter
+import com.rynkbit.coffeebank.ui.preference.report.ReportWriter
 import java.text.DateFormat
 import java.util.*
 
@@ -22,9 +24,11 @@ import java.util.*
 class PreferenceFragment : PreferenceFragmentCompat() {
     companion object {
         val CREATE_BACKUP_REQUEST = 5
+        val CREATE_REPORT_REQUEST = 25
         val READ_BACKUP_REQUEST = 10
         val ASK_READ_PERMISSION = 15
         val ASK_WRITE_PERMISSION = 20
+        val ASK_WRITE_REPORT_PERMISSION = 30
     }
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
@@ -69,6 +73,21 @@ class PreferenceFragment : PreferenceFragmentCompat() {
                     openFile(READ_BACKUP_REQUEST)
                 } else {
                     askReadPermissions()
+                }
+
+                return@setOnPreferenceClickListener true
+            }
+
+        findPreference<Preference>("create_report")
+            ?.setOnPreferenceClickListener {
+                if(checkWritePermissions()){
+                    openFile(CREATE_REPORT_REQUEST)
+                } else {
+                    activity?.let {
+                        ActivityCompat.requestPermissions(it,
+                            arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE),
+                            ASK_WRITE_REPORT_PERMISSION)
+                    }
                 }
 
                 return@setOnPreferenceClickListener true
@@ -128,6 +147,10 @@ class PreferenceFragment : PreferenceFragmentCompat() {
             if(checkReadPermissions()){
                 openFile(READ_BACKUP_REQUEST)
             }
+        } else if (requestCode == ASK_WRITE_REPORT_PERMISSION){
+            if(checkWritePermissions()){
+                openFile(CREATE_REPORT_REQUEST)
+            }
         }
     }
 
@@ -146,21 +169,37 @@ class PreferenceFragment : PreferenceFragmentCompat() {
                 val uri = data?.data
 
                 if(uri != null){
-                    BackupReader(context!!)
-                        .read(uri)
+                    if(!BackupReader(context!!)
+                            .read(uri)){
+                        Snackbar
+                            .make(view!!, R.string.error_reading_backup, Snackbar.LENGTH_SHORT)
+                            .show()
+                    }
+                }
+            } else if(requestCode == CREATE_REPORT_REQUEST){
+                val uri = data?.data
+
+                if(uri != null){
+                    ReportWriter(context!!)
+                        .write(uri)
                 }
             }
         }
     }
 
     private fun openFile(requestCode: Int) {
-        val intent = if(requestCode == CREATE_BACKUP_REQUEST) {
-            Intent(Intent.ACTION_CREATE_DOCUMENT)
-        } else {
-            Intent(Intent.ACTION_OPEN_DOCUMENT)
-        }
+        val intent = if(requestCode == CREATE_BACKUP_REQUEST ||
+            requestCode == CREATE_REPORT_REQUEST) {
+                Intent(Intent.ACTION_CREATE_DOCUMENT)
+            } else {
+                Intent(Intent.ACTION_OPEN_DOCUMENT)
+            }
 
-        intent.type = "application/json"
+        intent.type = if(requestCode != CREATE_REPORT_REQUEST) {
+                "application/json"
+            } else {
+                "text/csv"
+            }
 
         if(requestCode == CREATE_BACKUP_REQUEST) {
             intent.putExtra(
@@ -169,6 +208,14 @@ class PreferenceFragment : PreferenceFragmentCompat() {
                             Date()
                         ) +
                         ".json"
+            )
+        } else if (requestCode == CREATE_REPORT_REQUEST) {
+            intent.putExtra(
+                Intent.EXTRA_TITLE, "report-" +
+                        DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT).format(
+                            Date()
+                        ) +
+                        ".csv"
             )
         }
 
