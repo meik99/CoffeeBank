@@ -26,4 +26,7 @@ interface CustomerDao {
 
     @Delete
     fun delete(customer: Customer): Single<Unit>
+
+    @Query("DELETE FROM customer")
+    fun deleteAll(): Single<Unit>
 }

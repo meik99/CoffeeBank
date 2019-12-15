@@ -68,4 +68,18 @@ class CustomerFacade(
             .insert(customer)
             .subscribeOn(Schedulers.newThread())
     }
+
+    fun insertAll(customers: List<Customer>): Single<Unit> {
+        return appDatabase
+            .customerDao()
+            .insertAll(*customers.toTypedArray())
+            .subscribeOn(Schedulers.newThread())
+    }
+
+    fun deleteAll(): Single<Unit> {
+        return appDatabase
+            .customerDao()
+            .deleteAll()
+            .subscribeOn(Schedulers.newThread())
+    }
 }

@@ -43,10 +43,10 @@ class CRUDTransactionFragment : Fragment() {
 
     private fun updateTransactions() {
         TransactionFacade(AppDatabase.getInstance(context!!))
-            .getAll()
+            .getAll(1000, 0)
             .map {
                 activity?.runOnUiThread {
-                    crudTransactionAdapter.updateTransactions(it.sortedByDescending { it.date })
+                    crudTransactionAdapter.updateTransactions(it)
                 }
             }
             .subscribe()

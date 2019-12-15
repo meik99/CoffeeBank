@@ -64,4 +64,18 @@ class ProductFacade(val appDatabase: AppDatabase) {
             .insert(product)
             .subscribeOn(Schedulers.newThread())
     }
+
+    fun insertAll(products: List<Product>): Single<Unit> {
+        return appDatabase
+            .productDao()
+            .insertAll(*products.toTypedArray())
+            .subscribeOn(Schedulers.newThread())
+    }
+
+    fun deleteAll(): Single<Unit> {
+        return appDatabase
+            .productDao()
+            .deleteAll()
+            .subscribeOn(Schedulers.newThread())
+    }
 }

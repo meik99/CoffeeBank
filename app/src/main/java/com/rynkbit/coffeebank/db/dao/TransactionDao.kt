@@ -8,7 +8,7 @@ import io.reactivex.Single
 
 @Dao
 interface TransactionDao {
-    @Query("SELECT * FROM `transaction` LIMIT :limit OFFSET :offset")
+    @Query("SELECT * FROM `transaction` ORDER BY date DESC LIMIT :limit OFFSET :offset")
     fun getAll(limit: Int, offset: Int): Maybe<List<Transaction>>
 
     @Query("SELECT * FROM `transaction` WHERE uid = :id")
@@ -26,4 +26,7 @@ interface TransactionDao {
 
     @Delete
     fun delete(transaction: Transaction): Single<Unit>
+
+    @Query("DELETE FROM `transaction`")
+    fun deleteAll(): Single<Unit>
 }

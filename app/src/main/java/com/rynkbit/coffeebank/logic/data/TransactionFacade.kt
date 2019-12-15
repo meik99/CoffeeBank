@@ -56,10 +56,10 @@ class TransactionFacade(val appDatabase: AppDatabase) {
             }
     }
 
-    fun getAll(): Maybe<List<Transaction>> {
+    fun getAll(limit: Int, offset: Int): Maybe<List<Transaction>> {
         return appDatabase
             .transactionDao()
-            .getAll(1000, 0)
+            .getAll(limit, offset)
             .subscribeOn(Schedulers.newThread())
     }
 
@@ -94,7 +94,7 @@ class TransactionFacade(val appDatabase: AppDatabase) {
                             uid = customer.uid,
                             firstname = customer.firstname,
                             lastname = customer.lastname,
-                            balance = customer.balance - transaction.productPrice
+                            balance = customer.balance - (transaction.productPrice ?: 0.0)
                     ))
                     .blockingGet()
             }
@@ -104,5 +104,19 @@ class TransactionFacade(val appDatabase: AppDatabase) {
                     .delete(transaction)
                     .blockingGet()
             }
+    }
+
+    fun insertAll(transactions: List<Transaction>): Single<Unit> {
+        return appDatabase
+            .transactionDao()
+            .insertAll(*transactions.toTypedArray())
+            .subscribeOn(Schedulers.newThread())
+    }
+
+    fun deleteAll(): Single<Unit> {
+        return appDatabase
+            .transactionDao()
+            .deleteAll()
+            .subscribeOn(Schedulers.newThread())
     }
 }
