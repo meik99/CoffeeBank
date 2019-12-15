@@ -17,7 +17,7 @@ class ResponsiveStaggeredGridLayoutManager(context: Context, orientation: Int) :
         val px = TypedValue
             .applyDimension(
                 TypedValue.COMPLEX_UNIT_DIP,
-                138f,
+                150f,
                 resources.displayMetrics)
         val colCount = metrics.widthPixels / px
 

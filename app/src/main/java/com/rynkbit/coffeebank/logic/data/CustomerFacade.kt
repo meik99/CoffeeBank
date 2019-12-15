@@ -19,7 +19,7 @@ class CustomerFacade(
         if(!customerTestDataCreated) {
             val customers = mutableListOf<Customer>()
 
-            for (i in 1..3) {
+            for (i in 1..testDataAmount) {
                 customers.add(
                     Customer(
                         uid = 0,

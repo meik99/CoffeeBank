@@ -8,7 +8,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
+import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import com.rynkbit.coffeebank.R
 import com.rynkbit.coffeebank.db.database.AppDatabase
 import com.rynkbit.coffeebank.db.entitiy.Customer
@@ -36,7 +38,7 @@ class CustomerFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        customerProductViewModel = ViewModelProviders.of(this)[CustomerProductViewModel::class.java]
+        customerProductViewModel = ViewModelProviders.of(activity!!)[CustomerProductViewModel::class.java]
 
         createCustomerAdapter()
         setupCustomerList()
@@ -71,10 +73,31 @@ class CustomerFragment : Fragment() {
 
     private fun setupSettingsButton() {
         fabSettings.setOnClickListener {
-            Navigation
-                .findNavController(activity!!, R.id.navhost)
-                .navigate(R.id.action_customerFragment_to_preferenceFragment)
+            val preferences = PreferenceManager.getDefaultSharedPreferences(activity!!.applicationContext)
+            val pass = preferences.getString("password", "")
+
+            if(pass == "") {
+                openPreferences()
+            } else {
+                val dialog = PasswordDialog(context!!)
+
+                dialog.onPasswordCorrect = {
+                    openPreferences()
+                }
+                dialog.onPasswordIncorrect = {
+                    Snackbar
+                        .make(view!!, R.string.incorrect, Snackbar.LENGTH_SHORT)
+                        .show()
+                }
+                dialog.show()
+            }
         }
+    }
+
+    private fun openPreferences() {
+        Navigation
+            .findNavController(activity!!, R.id.navhost)
+            .navigate(R.id.action_customerFragment_to_preferenceFragment)
     }
 
     private fun onCustomerClick(): ((Customer) -> Unit)? = {customer ->

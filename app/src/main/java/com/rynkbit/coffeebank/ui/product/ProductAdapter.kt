@@ -20,6 +20,8 @@ class ProductAdapter : RecyclerView.Adapter<ProductAdapter.ViewHolder>() {
 
     private var products = listOf<Product>()
 
+    var onClickProduct: ((Product) -> Unit)? = null
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
             LayoutInflater
@@ -37,6 +39,10 @@ class ProductAdapter : RecyclerView.Adapter<ProductAdapter.ViewHolder>() {
                 .getCurrencyInstance(Locale.getDefault())
                 .format(products[position].price)
         holder.txtStock.text = products[position].stock.toString()
+
+        holder.itemView.setOnClickListener {
+            onClickProduct?.invoke(products[position])
+        }
     }
 
     fun updateProducts(products: List<Product>){

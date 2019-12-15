@@ -15,7 +15,7 @@ class ProductFacade(val appDatabase: AppDatabase) {
         if(!productTestDataCreated) {
             val products = mutableListOf<Product>()
 
-            for (i in 1..3) {
+            for (i in 1..testDataAmount) {
                 products.add(
                     Product(
                         uid = 0,
