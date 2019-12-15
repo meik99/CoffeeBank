@@ -33,6 +33,9 @@
         <action
             android:id="@+id/action_preferenceFragment_to_CRUDProductFragment"
             app:destination="@id/CRUDProductFragment" />
+        <action
+            android:id="@+id/action_preferenceFragment_to_CRUDTransactionFragment"
+            app:destination="@id/CRUDTransactionFragment" />
     </fragment>
     <fragment
         android:id="@+id/CRUDCustomerFragment"
@@ -44,4 +47,9 @@
         android:name="com.rynkbit.coffeebank.ui.preference.product.CRUDProductFragment"
         android:label="fragment_crudproduct"
         tools:layout="@layout/fragment_crudproduct" />
+    <fragment
+        android:id="@+id/CRUDTransactionFragment"
+        android:name="com.rynkbit.coffeebank.ui.preference.transaction.CRUDTransactionFragment"
+        android:label="fragment_crudtransaction"
+        tools:layout="@layout/fragment_crudtransaction" />
 </navigation>

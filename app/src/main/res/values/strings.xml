@@ -40,4 +40,7 @@
     <string name="buy">Buy</string>
     <string name="buy_product">Buy %1$s?</string>
     <string name="not_stocked">Product not in stock</string>
+    <string name="product">Product</string>
+    <string name="date">Date</string>
+    <string name="confirm_transaction_delete">Delete transaction of %1$s %2$s for %3$s?</string>
 </resources>

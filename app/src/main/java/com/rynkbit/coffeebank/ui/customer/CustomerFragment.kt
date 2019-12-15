@@ -53,7 +53,7 @@ class CustomerFragment : Fragment() {
             .subscribeOn(Schedulers.newThread())
             .map {
                 activity?.runOnUiThread {
-                    customerAdapter.updateCustomers(it)
+                    customerAdapter.updateCustomers(it.sortedBy { it.lastname })
                 }
             }
             .subscribe()

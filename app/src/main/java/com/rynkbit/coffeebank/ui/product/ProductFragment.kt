@@ -100,7 +100,7 @@ class ProductFragment : Fragment() {
             .subscribeOn(Schedulers.newThread())
             .map {
                 activity!!.runOnUiThread {
-                    productAdapter.updateProducts(it)
+                    productAdapter.updateProducts(it.sortedBy { it.name })
                 }
             }
             .subscribe()

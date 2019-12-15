@@ -30,6 +30,11 @@ class PreferenceFragment : PreferenceFragmentCompat() {
                 return@setOnPreferenceClickListener true
             }
 
-
+        findPreference<Preference>("transaction")
+            ?.setOnPreferenceClickListener {
+                Navigation.findNavController(activity!!, R.id.navhost)
+                    .navigate(R.id.action_preferenceFragment_to_CRUDTransactionFragment)
+                return@setOnPreferenceClickListener true
+            }
     }
 }
