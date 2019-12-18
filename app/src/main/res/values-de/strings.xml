@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">CoffeeBank</string>
+    <string name="add_customer">Kunde hinzufügen</string>
+    <string name="add_product">Produkt hinzufügen</string>
+    <string name="add_update_or_remove_customers">Änderen, Löschen oder Hinzufügen von Kunden</string>
+    <string name="add_update_or_remove_products">Änderen, Löschen oder Hinzufügen von Produkten</string>
+    <string name="backup">Backup</string>
+    <string name="balance">Konto</string>
+    <string name="buy">Kaufen</string>
+    <string name="buy_product">%1$s kaufen?</string>
+    <string name="confirm_customer_delete">Kunden %1$s %2$s löschen?</string>
+    <string name="confirm_product_delete">Produkt %1$s löschen?</string>
+    <string name="confirm_transaction_delete">Transaktion von %1$s %2$s für  %3$s löschen?</string>
+    <string name="create_backup">Backup erstellen</string>
+    <string name="create_backup_of_customers_products_transactions">Backup von Kunden, Produkten und Transaktionen erstellen</string>
+    <string name="create_report">Bericht erstellen</string>
+    <string name="create_report_of_customer_data">Erstelle Bericht über Kunden- und Kaufdaten</string>
+    <string name="customer">Kunden</string>
+    <string name="data">Daten</string>
+    <string name="date">Datum</string>
+    <string name="delete">Löschen</string>
+    <string name="error_reading_backup">Fehler beim Lesen des Backups</string>
+    <string name="firstname">Vorname</string>
+    <string name="incorrect">Falsches Passwort</string>
+    <string name="lastname">Nachname</string>
+    <string name="manage_transactions">Transaktionen verwalten</string>
+    <string name="name">Name</string>
+    <string name="not_stocked">Produkt ist nicht verfügbar</string>
+    <string name="password">Passwort</string>
+    <string name="price">Preis</string>
+    <string name="product">Produkt</string>
+    <string name="products">Produkte</string>
+    <string name="remove">Löschen</string>
+    <string name="restore_backup">Backup wiederherstellen</string>
+    <string name="restore_customers_products_transaction">Kunden, Produkte und Transaktionen wiederherstellen</string>
+    <string name="save">Speichern</string>
+    <string name="set_admin_password">Adminpasswort für diesen Bereich setzen</string>
+    <string name="stock">Verfügbar</string>
+    <string name="transactions">Transaktionen</string>
+</resources>
