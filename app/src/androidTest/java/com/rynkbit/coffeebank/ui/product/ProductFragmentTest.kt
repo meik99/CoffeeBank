@@ -9,6 +9,9 @@ import androidx.test.filters.LargeTest
 import androidx.test.rule.ActivityTestRule
 import com.rynkbit.coffeebank.MainActivity
 import com.rynkbit.coffeebank.R
+import com.rynkbit.coffeebank.db.database.AppDatabase
+import com.rynkbit.coffeebank.logic.data.CustomerFacade
+import com.rynkbit.coffeebank.logic.data.ProductFacade
 import com.rynkbit.coffeebank.ui.customer.CustomerAdapter
 import org.junit.Assert
 import org.junit.Rule
@@ -23,7 +26,14 @@ class ProductFragmentTest {
 
     @Test
     fun testClickProduct(){
-        sleep(5000)
+        sleep(2000)
+        val customers = CustomerFacade(AppDatabase.getInstance(activityRule.activity))
+            .getAll(10000, 0)
+            .blockingGet()
+        val products = ProductFacade(
+            AppDatabase.getInstance(activityRule.activity))
+            .getAll(10000, 0)
+            .blockingGet()
 
         Espresso.onView(ViewMatchers.withId(R.id.listCustomer))
             .check { view, noViewFoundException ->
@@ -35,7 +45,7 @@ class ProductFragmentTest {
                 val adapter = recyclerView.adapter
 
                 Assert.assertNotNull(adapter)
-                Assert.assertEquals(1000, adapter?.itemCount)
+                Assert.assertEquals(customers.size, adapter?.itemCount)
             }
 
         Espresso.onView(ViewMatchers.withId(R.id.listCustomer))
@@ -44,7 +54,7 @@ class ProductFragmentTest {
                     0, ViewActions.click()
                 ))
 
-        sleep(2)
+        sleep(200)
 
         Espresso.onView(ViewMatchers.withId(R.id.listProducts))
             .check { view, noViewFoundException ->
@@ -56,7 +66,7 @@ class ProductFragmentTest {
                 val adapter = recyclerView.adapter
 
                 Assert.assertNotNull(adapter)
-                Assert.assertEquals(1000, adapter?.itemCount)
+                Assert.assertEquals(products.size, adapter?.itemCount)
             }
     }
 }

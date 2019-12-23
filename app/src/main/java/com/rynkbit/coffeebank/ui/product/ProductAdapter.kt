@@ -35,10 +35,13 @@ class ProductAdapter : RecyclerView.Adapter<ProductAdapter.ViewHolder>() {
     override fun getItemCount(): Int = products.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val numberFormat = NumberFormat
+            .getNumberInstance(Locale.getDefault())
+        numberFormat.minimumFractionDigits = 2
+
         holder.txtName.text = products[position].name
         holder.txtPrice.text =
-            NumberFormat
-                .getNumberInstance(Locale.getDefault())
+            numberFormat
                 .format(
                     BigDecimal(products[position].price).setScale(2, RoundingMode.HALF_UP))
         holder.txtStock.text = products[position].stock.toString()

@@ -35,11 +35,14 @@ class CustomerAdapter : RecyclerView.Adapter<CustomerAdapter.ViewHolder>() {
     override fun getItemCount(): Int = customers.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val numberFormat = NumberFormat
+            .getNumberInstance(Locale.getDefault())
+        numberFormat.minimumFractionDigits = 2
+
         holder.txtFirstname.text = customers[position].firstname
         holder.txtLastname.text = customers[position].lastname
         holder.txtBalance.text =
-            NumberFormat
-                .getNumberInstance(Locale.getDefault())
+            numberFormat
                 .format(BigDecimal(customers[position].balance)
                     .setScale(2, RoundingMode.HALF_UP))
 

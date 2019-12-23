@@ -12,6 +12,7 @@ import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.RecyclerView
 import com.rynkbit.coffeebank.R
 import com.rynkbit.coffeebank.db.entitiy.Customer
+import com.rynkbit.coffeebank.logic.formatter.DecimalFormatter
 import java.math.BigDecimal
 import java.math.RoundingMode
 import java.text.NumberFormat
@@ -41,14 +42,11 @@ class CRUDCustomerAdapter : RecyclerView.Adapter<CRUDCustomerAdapter.ViewHolder>
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val customer = customers[position]
-        
+
         holder.txtID.text = customer.uid.toString()
         holder.editFirstname.setText(customer.firstname)
         holder.editLastname.setText(customer.lastname)
-        holder.editBalance.setText(
-            NumberFormat
-                .getNumberInstance(Locale.getDefault())
-                .format(BigDecimal(customer.balance).setScale(2, RoundingMode.HALF_UP)))
+        holder.editBalance.setText(DecimalFormatter().format(customer.balance))
 
         setupTextChangedListener(holder, customer)
         setupButtonClickListener(holder, customer)
@@ -109,18 +107,21 @@ class CRUDCustomerAdapter : RecyclerView.Adapter<CRUDCustomerAdapter.ViewHolder>
         holder
             .editBalance
             .addTextChangedListener {
-                val balance = it.toString().toDoubleOrNull()
+                val balance =
+                    if(it.toString().isNotEmpty()) {
+                        DecimalFormatter().parse(it.toString())
+                    }else{
+                        0.0
+                    }
 
-                if (balance != null){
-                    onCustomerChange?.invoke(
-                        Customer(
-                            customer.uid,
-                            customer.firstname,
-                            customer.lastname,
-                            balance
-                        )
+                onCustomerChange?.invoke(
+                    Customer(
+                        customer.uid,
+                        customer.firstname,
+                        customer.lastname,
+                        balance
                     )
-                }
+                )
             }
     }
 

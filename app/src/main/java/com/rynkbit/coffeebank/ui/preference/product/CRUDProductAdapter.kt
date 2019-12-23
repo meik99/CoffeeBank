@@ -13,6 +13,7 @@ import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.RecyclerView
 import com.rynkbit.coffeebank.R
 import com.rynkbit.coffeebank.db.entitiy.Product
+import com.rynkbit.coffeebank.logic.formatter.DecimalFormatter
 import java.math.BigDecimal
 import java.math.RoundingMode
 import java.text.NumberFormat
@@ -45,11 +46,7 @@ class CRUDProductAdapter : RecyclerView.Adapter<CRUDProductAdapter.ViewHolder>()
 
         holder.txtID.text = product.uid.toString()
         holder.editName.setText(product.name)
-        holder.editPrice.setText(
-            NumberFormat
-                .getNumberInstance(Locale.getDefault())
-                .format(
-                    BigDecimal(product.price).setScale(2, RoundingMode.HALF_UP)))
+        holder.editPrice.setText(DecimalFormatter().format(product.price))
         holder.editStock.setText(
             product.stock.toString())
 
@@ -92,11 +89,18 @@ class CRUDProductAdapter : RecyclerView.Adapter<CRUDProductAdapter.ViewHolder>()
         }
 
         holder.editPrice.addTextChangedListener {
+            val price =
+                if(it.toString().isNotEmpty()) {
+                    DecimalFormatter().parse(it.toString())
+                }else{
+                    0.0
+                }
+
             onProductChange?.invoke(
                 Product(
                     uid = product.uid,
                     name = product.name,
-                    price = it.toString().toDoubleOrNull() ?: 0.0,
+                    price = price,
                     stock = product.stock
                 )
             )

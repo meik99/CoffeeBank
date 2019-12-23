@@ -2,8 +2,10 @@ package com.rynkbit.coffeebank.ui.customer
 
 import android.app.AlertDialog
 import android.content.Context
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.inputmethod.InputMethodManager
 import androidx.preference.PreferenceManager
 import com.rynkbit.coffeebank.R
 import kotlinx.android.synthetic.main.dialog_password.*
@@ -15,8 +17,8 @@ class PasswordDialog(context: Context) : AlertDialog(context) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setContentView(R.layout.dialog_password)
         setTitle(R.string.password)
+        setContentView(R.layout.dialog_password)
 
         btnCancel.setOnClickListener { dismiss() }
         btnOk.setOnClickListener {
@@ -31,5 +33,12 @@ class PasswordDialog(context: Context) : AlertDialog(context) {
                 onPasswordIncorrect?.invoke()
             }
         }
+
+        setOnShowListener {
+            val methodManager =
+                context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            methodManager.showSoftInput(editPassword, InputMethodManager.SHOW_IMPLICIT)
+        }
     }
+
 }

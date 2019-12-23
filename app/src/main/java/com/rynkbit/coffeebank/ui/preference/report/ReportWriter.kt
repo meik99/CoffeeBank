@@ -16,6 +16,7 @@ import java.math.BigDecimal
 import java.math.RoundingMode
 import java.text.DateFormat
 import java.text.NumberFormat
+import java.text.SimpleDateFormat
 import java.util.*
 
 class ReportWriter(val context: Context) {
@@ -60,13 +61,13 @@ class ReportWriter(val context: Context) {
                     .append("Price")
                     .append("\n")
 
+                val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
                 for (transaction in transactions) {
                     stringBuilder
                         .append(transaction.uid)
                         .append(";")
                         .append(
-                            DateFormat
-                                .getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT)
+                            simpleDateFormat
                                 .format(transaction.date)
                         )
                         .append(";")

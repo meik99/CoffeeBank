@@ -16,6 +16,7 @@ import com.rynkbit.coffeebank.ui.preference.backup.BackupReader
 import com.rynkbit.coffeebank.ui.preference.backup.BackupWriter
 import com.rynkbit.coffeebank.ui.preference.report.ReportWriter
 import java.text.DateFormat
+import java.text.SimpleDateFormat
 import java.util.*
 
 /**
@@ -195,26 +196,25 @@ class PreferenceFragment : PreferenceFragmentCompat() {
                 Intent(Intent.ACTION_OPEN_DOCUMENT)
             }
 
-        intent.type = if(requestCode != CREATE_REPORT_REQUEST) {
-                "application/json"
-            } else {
-                "text/csv"
+        intent.type =
+            when(requestCode){
+                CREATE_REPORT_REQUEST -> "text/csv"
+                READ_BACKUP_REQUEST -> "*/*"
+                CREATE_BACKUP_REQUEST -> "application/json"
+                else -> "text/plain"
             }
 
+        val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd_HH-mm-ss", Locale.getDefault())
         if(requestCode == CREATE_BACKUP_REQUEST) {
             intent.putExtra(
                 Intent.EXTRA_TITLE, "backup-" +
-                        DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT).format(
-                            Date()
-                        ) +
+                        simpleDateFormat.format(Date()) +
                         ".json"
             )
         } else if (requestCode == CREATE_REPORT_REQUEST) {
             intent.putExtra(
                 Intent.EXTRA_TITLE, "report-" +
-                        DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT).format(
-                            Date()
-                        ) +
+                        simpleDateFormat.format(Date()) +
                         ".csv"
             )
         }

@@ -12,6 +12,8 @@ import androidx.test.runner.screenshot.ScreenCapture
 import androidx.test.runner.screenshot.Screenshot
 import com.rynkbit.coffeebank.MainActivity
 import com.rynkbit.coffeebank.R
+import com.rynkbit.coffeebank.db.database.AppDatabase
+import com.rynkbit.coffeebank.logic.data.CustomerFacade
 import org.junit.Assert.*
 import org.junit.Rule
 import org.junit.Test
@@ -27,6 +29,10 @@ class CustomerFragmentTests {
     fun testClickCustomer(){
         sleep(5000)
 
+        val customers = CustomerFacade(AppDatabase.getInstance(activityRule.activity))
+            .getAll(10000, 0)
+            .blockingGet()
+
         onView(withId(R.id.listCustomer))
             .check { view, noViewFoundException ->
                 assertNull(noViewFoundException)
@@ -37,7 +43,7 @@ class CustomerFragmentTests {
                 val adapter = recyclerView.adapter
 
                 assertNotNull(adapter)
-                assertEquals(1000, adapter?.itemCount)
+                assertEquals(customers.size, adapter?.itemCount)
             }
 
         onView(

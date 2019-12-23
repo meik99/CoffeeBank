@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
@@ -19,6 +20,7 @@ import com.rynkbit.coffeebank.ui.CustomerProductViewModel
 import com.rynkbit.coffeebank.ui.ResponsiveStaggeredGridLayoutManager
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_customer.*
+
 
 /**
  * A simple [Fragment] subclass.
@@ -89,7 +91,13 @@ class CustomerFragment : Fragment() {
                         .make(view!!, R.string.incorrect, Snackbar.LENGTH_SHORT)
                         .show()
                 }
+                dialog.create()
                 dialog.show()
+
+                dialog.window?.clearFlags(
+                    WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
+                            or WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM
+                )
             }
         }
     }
