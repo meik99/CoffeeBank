@@ -2,7 +2,6 @@ package com.rynkbit.coffeebank.ui.preference.product
 
 import android.app.AlertDialog
 import android.content.Context
-import android.view.ContextMenu
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,10 +13,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.rynkbit.coffeebank.R
 import com.rynkbit.coffeebank.db.entitiy.Product
 import com.rynkbit.coffeebank.logic.formatter.DecimalFormatter
-import java.math.BigDecimal
-import java.math.RoundingMode
-import java.text.NumberFormat
-import java.util.*
 
 class CRUDProductAdapter : RecyclerView.Adapter<CRUDProductAdapter.ViewHolder>() {
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

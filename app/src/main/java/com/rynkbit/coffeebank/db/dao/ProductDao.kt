@@ -2,7 +2,6 @@ package com.rynkbit.coffeebank.db.dao
 
 import androidx.room.*
 import com.rynkbit.coffeebank.db.entitiy.Product
-import io.reactivex.Flowable
 import io.reactivex.Maybe
 import io.reactivex.Single
 

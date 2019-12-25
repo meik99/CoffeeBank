@@ -3,7 +3,6 @@ package com.rynkbit.coffeebank.ui.preference.customer
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.rynkbit.coffeebank.db.database.AppDatabase
 import com.rynkbit.coffeebank.db.entitiy.Customer
 import com.rynkbit.coffeebank.logic.data.CustomerFacade
 import io.reactivex.disposables.CompositeDisposable

@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.rynkbit.coffeebank.R
-import com.rynkbit.coffeebank.db.entitiy.Product
 import com.rynkbit.coffeebank.db.entitiy.Transaction
 import java.math.BigDecimal
 import java.math.RoundingMode

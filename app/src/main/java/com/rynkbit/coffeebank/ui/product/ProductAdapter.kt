@@ -7,7 +7,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.rynkbit.coffeebank.R
 import com.rynkbit.coffeebank.db.entitiy.Product
-import kotlinx.android.synthetic.main.item_product.view.*
 import java.math.BigDecimal
 import java.math.RoundingMode
 import java.text.NumberFormat

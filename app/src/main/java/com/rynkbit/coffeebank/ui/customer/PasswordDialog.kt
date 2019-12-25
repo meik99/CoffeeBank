@@ -2,9 +2,7 @@ package com.rynkbit.coffeebank.ui.customer
 
 import android.app.AlertDialog
 import android.content.Context
-import android.content.DialogInterface
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.inputmethod.InputMethodManager
 import androidx.preference.PreferenceManager
 import com.rynkbit.coffeebank.R
