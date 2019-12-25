@@ -39,6 +39,9 @@ class ColorPickerDialog(
 
         seekerObserver = Observer {
             txtColorPreview.setBackgroundColor(color)
+            txtRed.text = context.getString(R.string.rgb_red, red.value!!)
+            txtGreen.text = context.getString(R.string.rgb_green, green.value!!)
+            txtBlue.text = context.getString(R.string.rgb_blue, blue.value!!)
         }
 
         red.value = customerRed
