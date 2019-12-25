@@ -10,7 +10,7 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import java.util.*
 
-class TransactionFacade(val appDatabase: AppDatabase) {
+class TransactionFacade(private val appDatabase: AppDatabase) {
     fun buy(customer: Customer, product: Product): Single<Disposable> {
         val updatedCustomer = Customer(
             uid = customer.uid,

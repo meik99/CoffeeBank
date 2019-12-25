@@ -9,8 +9,6 @@ import com.rynkbit.coffeebank.logic.data.ProductFacade
 import com.rynkbit.coffeebank.logic.data.TransactionFacade
 import java.io.BufferedReader
 import java.io.InputStreamReader
-import java.lang.Exception
-import java.lang.IllegalStateException
 
 class BackupReader (val context: Context) {
     fun read(uri: Uri): Boolean {

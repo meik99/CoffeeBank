@@ -34,7 +34,6 @@
     <string name="remove">Löschen</string>
     <string name="restore_backup">Backup wiederherstellen</string>
     <string name="restore_customers_products_transaction">Kunden, Produkte und Transaktionen wiederherstellen</string>
-    <string name="save">Speichern</string>
     <string name="set_admin_password">Adminpasswort für diesen Bereich setzen</string>
     <string name="stock">Verfügbar</string>
     <string name="transactions">Transaktionen</string>

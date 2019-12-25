@@ -8,7 +8,6 @@ import com.rynkbit.coffeebank.db.database.AppDatabase
 import com.rynkbit.coffeebank.db.entitiy.Customer
 import io.reactivex.schedulers.Schedulers
 import org.junit.Assert.assertEquals
-import org.junit.Assert.fail
 import org.junit.Before
 import org.junit.Test
 
@@ -19,10 +18,10 @@ import org.junit.Test
  */
 @SmallTest
 class CustomerTests {
-    lateinit var appDatabase: AppDatabase
-    lateinit var applicationContext: Context
+    private lateinit var appDatabase: AppDatabase
+    private lateinit var applicationContext: Context
 
-    val customerAmount = 1000
+    private val customerAmount = 1000
 
     @Before
     fun init(){

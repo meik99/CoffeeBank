@@ -3,8 +3,6 @@ package com.rynkbit.coffeebank.ui.preference.product
 import android.app.AlertDialog
 import android.content.Context
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
 import com.rynkbit.coffeebank.R
 import com.rynkbit.coffeebank.db.database.AppDatabase
 import com.rynkbit.coffeebank.db.entitiy.Product

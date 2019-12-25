@@ -13,10 +13,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.rynkbit.coffeebank.R
 import com.rynkbit.coffeebank.db.entitiy.Customer
 import com.rynkbit.coffeebank.logic.formatter.DecimalFormatter
-import java.math.BigDecimal
-import java.math.RoundingMode
-import java.text.NumberFormat
-import java.util.*
 
 class CRUDCustomerAdapter : RecyclerView.Adapter<CRUDCustomerAdapter.ViewHolder>() {
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

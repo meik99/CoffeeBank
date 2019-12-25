@@ -8,7 +8,7 @@ import io.reactivex.schedulers.Schedulers
 
 
 class CustomerFacade(
-    val appDatabase: AppDatabase
+    private val appDatabase: AppDatabase
 ) {
 
     companion object {
@@ -45,14 +45,6 @@ class CustomerFacade(
             .customerDao()
             .getAll(limit, offset)
             .subscribeOn(Schedulers.newThread())
-    }
-
-    fun updateFun(): ((Customer) -> Unit) = { customer ->
-        appDatabase
-            .customerDao()
-            .update(customer)
-            .subscribeOn(Schedulers.newThread())
-            .blockingGet()
     }
 
     fun delete(customer: Customer): Single<Unit> {

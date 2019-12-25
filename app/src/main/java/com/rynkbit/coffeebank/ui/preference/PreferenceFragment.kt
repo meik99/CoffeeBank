@@ -15,7 +15,6 @@ import com.rynkbit.coffeebank.R
 import com.rynkbit.coffeebank.ui.preference.backup.BackupReader
 import com.rynkbit.coffeebank.ui.preference.backup.BackupWriter
 import com.rynkbit.coffeebank.ui.preference.report.ReportWriter
-import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -24,12 +23,12 @@ import java.util.*
  */
 class PreferenceFragment : PreferenceFragmentCompat() {
     companion object {
-        val CREATE_BACKUP_REQUEST = 5
-        val CREATE_REPORT_REQUEST = 25
-        val READ_BACKUP_REQUEST = 10
-        val ASK_READ_PERMISSION = 15
-        val ASK_WRITE_PERMISSION = 20
-        val ASK_WRITE_REPORT_PERMISSION = 30
+        const val CREATE_BACKUP_REQUEST = 5
+        const val CREATE_REPORT_REQUEST = 25
+        const val READ_BACKUP_REQUEST = 10
+        const val ASK_READ_PERMISSION = 15
+        const val ASK_WRITE_PERMISSION = 20
+        const val ASK_WRITE_REPORT_PERMISSION = 30
     }
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {

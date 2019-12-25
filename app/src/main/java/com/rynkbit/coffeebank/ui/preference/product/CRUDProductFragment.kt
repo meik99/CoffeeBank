@@ -18,7 +18,7 @@ import kotlinx.android.synthetic.main.fragment_product.*
  */
 class CRUDProductFragment : Fragment() {
 
-    lateinit var crudProductAdapter: CRUDProductAdapter
+    private lateinit var crudProductAdapter: CRUDProductAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

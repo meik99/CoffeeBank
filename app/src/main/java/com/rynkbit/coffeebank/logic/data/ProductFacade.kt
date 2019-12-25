@@ -6,7 +6,7 @@ import io.reactivex.Maybe
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
 
-class ProductFacade(val appDatabase: AppDatabase) {
+class ProductFacade(private val appDatabase: AppDatabase) {
     companion object{
         var productTestDataCreated = false
     }

@@ -1,11 +1,10 @@
 package com.rynkbit.coffeebank
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Window
 import android.view.WindowManager
+import androidx.appcompat.app.AppCompatActivity
 import com.rynkbit.coffeebank.db.database.AppDatabase
-import com.rynkbit.coffeebank.db.entitiy.Customer
 import com.rynkbit.coffeebank.logic.data.CustomerFacade
 import com.rynkbit.coffeebank.logic.data.ProductFacade
 
@@ -15,7 +14,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         requestWindowFeature(Window.FEATURE_NO_TITLE)
-        getWindow().setFlags(
+        window.setFlags(
             WindowManager.LayoutParams.FLAG_FULLSCREEN,
             WindowManager.LayoutParams.FLAG_FULLSCREEN)
 

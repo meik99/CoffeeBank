@@ -1,8 +1,6 @@
 <resources>
     <string name="app_name">CoffeeBank</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
     <string name="data">Data</string>
     <string name="add_update_or_remove_customers">Add, update or remove customers</string>
     <string name="customer">Customer</string>
@@ -28,7 +26,6 @@
     <string name="lastname">Lastname</string>
     <string name="delete">Delete</string>
     <string name="confirm_customer_delete">Delete customer %1$s %2$s?</string>
-    <string name="save">Save</string>
     <string name="add_customer">Add Customer</string>
     <string name="price">Price</string>
     <string name="stock">Stock</string>

@@ -12,7 +12,7 @@ import com.rynkbit.coffeebank.logic.data.TransactionFacade
 import kotlinx.android.synthetic.main.fragment_crudtransaction.*
 
 class CRUDTransactionFragment : Fragment() {
-    lateinit var crudTransactionAdapter: CRUDTransactionAdapter
+    private lateinit var crudTransactionAdapter: CRUDTransactionAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

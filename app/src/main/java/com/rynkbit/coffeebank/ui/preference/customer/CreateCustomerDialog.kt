@@ -8,9 +8,7 @@ import android.widget.EditText
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.rynkbit.coffeebank.R
-import com.rynkbit.coffeebank.db.database.AppDatabase
 import com.rynkbit.coffeebank.db.entitiy.Customer
-import com.rynkbit.coffeebank.logic.data.CustomerFacade
 
 class CreateCustomerDialog(context: Context?) : AlertDialog(context) {
 
