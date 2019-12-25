@@ -44,4 +44,5 @@
     <string name="rgb_red">Red %1$d</string>
     <string name="rgb_green">Green %1$d</string>
     <string name="rgb_blue">Blue %1$d</string>
+    <string name="color">Color</string>
 </resources>

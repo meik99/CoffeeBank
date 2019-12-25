@@ -13,14 +13,17 @@ import androidx.recyclerview.widget.RecyclerView
 import com.rynkbit.coffeebank.R
 import com.rynkbit.coffeebank.db.entitiy.Customer
 import com.rynkbit.coffeebank.logic.formatter.DecimalFormatter
+import com.rynkbit.coffeebank.ui.preference.customer.color.ColorPickerDialog
+import kotlinx.android.synthetic.main.item_crudcustomer.view.*
 
 class CRUDCustomerAdapter : RecyclerView.Adapter<CRUDCustomerAdapter.ViewHolder>() {
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val txtID: TextView = itemView.findViewById(R.id.txtID)
-        val editFirstname: EditText = itemView.findViewById(R.id.editFirstname)
-        val editLastname: EditText = itemView.findViewById(R.id.editLastname)
-        val editBalance: EditText = itemView.findViewById(R.id.editBalance)
-        val btnRemove: Button = itemView.findViewById(R.id.btnRemove)
+        val txtID: TextView = itemView.txtID
+        val editFirstname: EditText = itemView.editFirstname
+        val editLastname: EditText = itemView.editLastname
+        val editBalance: EditText = itemView.editBalance
+        val btnRemove: Button = itemView.btnRemove
+        val btnColor: Button = itemView.btnColor
     }
 
     var customers = listOf<Customer>()
@@ -47,6 +50,7 @@ class CRUDCustomerAdapter : RecyclerView.Adapter<CRUDCustomerAdapter.ViewHolder>
         holder.editFirstname.setText(customer.firstname)
         holder.editLastname.setText(customer.lastname)
         holder.editBalance.setText(DecimalFormatter().format(customer.balance))
+        holder.btnColor.setBackgroundColor(customer.color)
 
         setupTextChangedListener(holder, customer)
         setupButtonClickListener(holder, customer)
@@ -59,6 +63,22 @@ class CRUDCustomerAdapter : RecyclerView.Adapter<CRUDCustomerAdapter.ViewHolder>
         holder.btnRemove.setOnClickListener {
             showConfirmationDialog(holder.itemView.context, customer)
         }
+        holder.btnColor.setOnClickListener {
+            showColorPickerDialog(holder, customer)
+        }
+    }
+
+    override fun getItemId(position: Int): Long {
+        return customers[position].uid
+    }
+
+    private fun showColorPickerDialog(holder: ViewHolder, customer: Customer) {
+        val colorPicker = ColorPickerDialog(holder.itemView.context, customer)
+        colorPicker.setOnDismissListener {
+            holder.btnColor.setBackgroundColor(customer.color)
+            onCustomerChange?.invoke(customer)
+        }
+        colorPicker.show()
     }
 
     private fun showConfirmationDialog(context: Context, customer: Customer) {
