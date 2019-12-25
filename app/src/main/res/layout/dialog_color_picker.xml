@@ -1,92 +1,139 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:id="@+id/txtColorPreview"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/color_picker_height"
-        android:layout_marginTop="@dimen/dialog_margin"
-        android:layout_marginBottom="@dimen/dialog_margin" />
+    <data>
+        <import type="android.graphics.Color" />
 
-    <TextView
-        android:id="@+id/txtRed"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dialog_margin"
-        android:layout_marginEnd="@dimen/dialog_margin"
-        android:text="@string/rgb_red" />
-
-    <SeekBar
-        android:id="@+id/seekRed"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/dialog_margin"
-        android:max="255"
-        android:progress="255"
-        android:progressTint="@android:color/holo_red_dark"
-        android:thumbTint="@android:color/holo_red_dark" />
-
-    <TextView
-        android:id="@+id/txtGreen"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dialog_margin"
-        android:layout_marginEnd="@dimen/dialog_margin"
-        android:text="@string/rgb_green" />
-
-    <SeekBar
-        android:id="@+id/seekGreen"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/dialog_margin"
-        android:max="255"
-        android:progress="255"
-        android:progressTint="@android:color/holo_green_dark"
-        android:thumbTint="@android:color/holo_green_dark" />
-
-    <TextView
-        android:id="@+id/txtBlue"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/dialog_margin"
-        android:text="@string/rgb_blue" />
-
-    <SeekBar
-        android:id="@+id/seekBlue"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/dialog_margin"
-        android:max="255"
-        android:progress="255"
-        android:progressTint="@android:color/holo_blue_dark"
-        android:thumbTint="@android:color/holo_blue_dark" />
+        <variable
+            name="pickedColor"
+            type="com.rynkbit.coffeebank.ui.preference.customer.color.PickedColor" />
+        <variable
+            name="dialog"
+            type="com.rynkbit.coffeebank.ui.preference.customer.color.ColorPickerDialog" />
+    </data>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:layout_margin="@dimen/dialog_margin"
-        android:gravity="end"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
-        <Button
-            android:id="@+id/btnCancel"
-            style="@style/Widget.AppCompat.Button.Borderless"
+        <TextView
+            android:id="@+id/textView23"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dialog_margin"
+            android:layout_marginTop="@dimen/dialog_margin"
+            android:layout_marginEnd="@dimen/dialog_margin"
+            android:text="@string/color"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+
+        <TextView
+            android:id="@+id/txtColorPreview"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/color_picker_height"
+            android:layout_marginTop="@dimen/dialog_margin"
+            android:layout_marginBottom="@dimen/default_margin"
+            android:background="@{Color.rgb(pickedColor.red, pickedColor.green, pickedColor.blue)}" />
+
+        <TextView
+            android:id="@+id/txtRed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dialog_margin"
+            android:layout_marginTop="@dimen/default_margin"
+            android:layout_marginEnd="@dimen/dialog_margin"
+            android:layout_marginBottom="@dimen/default_margin"
+            android:text="@{@string/rgb_red(pickedColor.red)}" />
+
+        <SeekBar
+            android:id="@+id/seekRed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dialog_margin"
+            android:layout_marginTop="@dimen/default_margin"
+            android:layout_marginEnd="@dimen/dialog_margin"
+            android:layout_marginBottom="@dimen/default_margin"
+            android:max="255"
+            android:progress="@={pickedColor.red}"
+            android:progressTint="@android:color/holo_red_dark"
+            android:thumbTint="@android:color/holo_red_dark"
+            tools:progress="255" />
+
+        <TextView
+            android:id="@+id/txtGreen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dialog_margin"
+            android:layout_marginTop="@dimen/default_margin"
+            android:layout_marginEnd="@dimen/dialog_margin"
+            android:layout_marginBottom="@dimen/default_margin"
+            android:text="@{@string/rgb_green(pickedColor.green)}" />
+
+        <SeekBar
+            android:id="@+id/seekGreen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dialog_margin"
+            android:layout_marginTop="@dimen/default_margin"
+            android:layout_marginEnd="@dimen/dialog_margin"
+            android:layout_marginBottom="@dimen/default_margin"
+            android:max="255"
+            android:progress="@={pickedColor.green}"
+            android:progressTint="@android:color/holo_green_dark"
+            android:thumbTint="@android:color/holo_green_dark"
+            tools:progress="255" />
+
+        <TextView
+            android:id="@+id/txtBlue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dialog_margin"
+            android:layout_marginTop="@dimen/default_margin"
+            android:layout_marginEnd="@dimen/dialog_margin"
+            android:layout_marginBottom="@dimen/default_margin"
+            android:text="@{@string/rgb_blue(pickedColor.blue)}" />
+
+        <SeekBar
+            android:id="@+id/seekBlue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dialog_margin"
+            android:layout_marginTop="@dimen/default_margin"
+            android:layout_marginEnd="@dimen/dialog_margin"
+            android:layout_marginBottom="@dimen/default_margin"
+            android:max="255"
+            android:progress="@={pickedColor.blue}"
+            android:progressTint="@android:color/holo_blue_dark"
+            android:thumbTint="@android:color/holo_blue_dark"
+            tools:progress="255" />
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:text="@android:string/cancel" />
+            android:layout_gravity="end"
+            android:layout_margin="@dimen/dialog_margin"
+            android:gravity="end"
+            android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/btnOk"
-            style="@style/Widget.AppCompat.Button.Borderless.Colored"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@android:string/ok" />
+            <Button
+                android:id="@+id/btnCancel"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:onClick="@{() -> dialog.dismiss()}"
+                android:text="@android:string/cancel" />
+
+            <Button
+                android:id="@+id/btnOk"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="@{() -> dialog.complete()}"
+                android:text="@android:string/ok" />
+        </LinearLayout>
+
     </LinearLayout>
-
-</LinearLayout>
+</layout>

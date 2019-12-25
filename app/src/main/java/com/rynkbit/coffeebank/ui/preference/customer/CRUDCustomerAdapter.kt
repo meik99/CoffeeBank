@@ -106,7 +106,8 @@ class CRUDCustomerAdapter : RecyclerView.Adapter<CRUDCustomerAdapter.ViewHolder>
                         customer.uid,
                         it?.toString() ?: String(),
                         customer.lastname,
-                        customer.balance
+                        customer.balance,
+                        customer.color
                     )
                 )
             }
@@ -119,7 +120,8 @@ class CRUDCustomerAdapter : RecyclerView.Adapter<CRUDCustomerAdapter.ViewHolder>
                         customer.uid,
                         customer.firstname,
                         it?.toString() ?: String(),
-                        customer.balance
+                        customer.balance,
+                        customer.color
                     )
                 )
             }
@@ -139,7 +141,8 @@ class CRUDCustomerAdapter : RecyclerView.Adapter<CRUDCustomerAdapter.ViewHolder>
                         customer.uid,
                         customer.firstname,
                         customer.lastname,
-                        balance
+                        balance,
+                        customer.color
                     )
                 )
             }

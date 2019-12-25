@@ -16,6 +16,9 @@ interface CustomerDao {
     @Update
     fun update(customer: Customer): Single<Unit>
 
+    @Update
+    fun updateAll(customers: List<Customer>): Single<Unit>
+
     @Insert
     fun insert(customer: Customer): Single<Long>
 

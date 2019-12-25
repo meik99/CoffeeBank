@@ -88,4 +88,11 @@ class CustomerFacade(
             .update(customer)
             .subscribeOn(Schedulers.newThread())
     }
+
+    fun updateAll(customers: List<Customer>): Single<Unit> {
+        return appDatabase
+            .customerDao()
+            .updateAll(customers)
+            .subscribeOn(Schedulers.newThread())
+    }
 }

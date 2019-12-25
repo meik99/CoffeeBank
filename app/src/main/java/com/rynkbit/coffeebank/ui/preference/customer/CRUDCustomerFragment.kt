@@ -10,7 +10,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.rynkbit.coffeebank.R
 import com.rynkbit.coffeebank.db.database.AppDatabase
+import com.rynkbit.coffeebank.db.entitiy.Customer
 import com.rynkbit.coffeebank.logic.data.CustomerFacade
+import com.rynkbit.coffeebank.ui.preference.customer.color.ColorPickerDialog
 import kotlinx.android.synthetic.main.fragment_crudcustomer.*
 import kotlinx.android.synthetic.main.fragment_customer.listCustomer
 
@@ -37,6 +39,18 @@ class CRUDCustomerFragment : Fragment() {
         setupCustomerAdapter()
         setupCustomerList()
         setupAddButton()
+        setupEqualizeColorButton()
+    }
+
+    private fun setupEqualizeColorButton() {
+        btnEqualizeColor.setOnClickListener {
+            val customer = Customer()
+            val dialog = ColorPickerDialog(context!!, customer)
+            dialog.show()
+            dialog.setOnDismissListener {
+                viewmodel.equalizeColor(customer)
+            }
+        }
     }
 
     private fun setupViewmodel() {

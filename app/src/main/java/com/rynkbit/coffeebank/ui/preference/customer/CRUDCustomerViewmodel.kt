@@ -1,5 +1,6 @@
 package com.rynkbit.coffeebank.ui.preference.customer
 
+import android.annotation.SuppressLint
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -63,5 +64,19 @@ class CRUDCustomerViewmodel(private val customerFacade: CustomerFacade) : ViewMo
     override fun onCleared() {
         super.onCleared()
         _disposables.dispose()
+    }
+
+    @SuppressLint("CheckResult")
+    fun equalizeColor(customer: Customer) {
+        _customers.value?.forEach {
+            it.color = customer.color
+        }
+
+        _disposables.add(
+            customerFacade.updateAll(_customers.value!!)
+                .subscribe{_, _ ->
+                    _customers.postValue(_customers.value)
+                }
+        )
     }
 }

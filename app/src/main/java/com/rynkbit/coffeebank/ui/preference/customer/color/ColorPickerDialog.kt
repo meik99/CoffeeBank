@@ -2,91 +2,41 @@ package com.rynkbit.coffeebank.ui.preference.customer.color
 
 import android.app.AlertDialog
 import android.content.Context
-import android.graphics.Color
 import android.os.Bundle
-import android.widget.SeekBar
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
+import android.view.LayoutInflater
 import com.rynkbit.coffeebank.R
+import com.rynkbit.coffeebank.databinding.DialogColorPickerBinding
 import com.rynkbit.coffeebank.db.entitiy.Customer
-import kotlinx.android.synthetic.main.dialog_color_picker.*
 
 class ColorPickerDialog(
     context: Context,
     val customer: Customer
-) : AlertDialog(context), SeekBar.OnSeekBarChangeListener {
-    private val red = MutableLiveData<Int>()
-    private val green = MutableLiveData<Int>()
-    private val blue = MutableLiveData<Int>()
-    private val color
-        get() = Color.rgb(red.value!!, green.value!!, blue.value!!)
-
-    private lateinit var seekerObserver: Observer<Int>
+) : AlertDialog(context){
+    private lateinit var binding: DialogColorPickerBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val customerRed = Color.red(customer.color)
-        val customerGreen = Color.green(customer.color)
-        val customerBlue = Color.blue(customer.color)
+        binding = DialogColorPickerBinding.inflate(LayoutInflater.from(context))
+        binding.pickedColor = PickedColor.fromColor(customer.color)
+        binding.dialog = this
 
-        setContentView(R.layout.dialog_color_picker)
+        setContentView(binding.root)
         setTitle(R.string.color)
 
-        seekRed.setOnSeekBarChangeListener(this)
-        seekGreen.setOnSeekBarChangeListener(this)
-        seekBlue.setOnSeekBarChangeListener(this)
+        binding.executePendingBindings()
 
-        seekerObserver = Observer {
-            txtColorPreview.setBackgroundColor(color)
-            txtRed.text = context.getString(R.string.rgb_red, red.value!!)
-            txtGreen.text = context.getString(R.string.rgb_green, green.value!!)
-            txtBlue.text = context.getString(R.string.rgb_blue, blue.value!!)
-        }
 
-        red.value = customerRed
-        green.value = customerGreen
-        blue.value = customerBlue
 
-        seekRed.progress = customerRed
-        seekGreen.progress = customerGreen
-        seekBlue.progress = customerBlue
-
-        btnCancel.setOnClickListener { dismiss() }
-        btnOk.setOnClickListener {
-            customer.color = color
-            dismiss()
-        }
+//        binding.btnCancel.setOnClickListener { dismiss() }
+//        binding.btnOk.setOnClickListener {
+//            customer.color = binding.pickedColor.color
+//            dismiss()
+//        }
     }
 
-    override fun onStart() {
-        super.onStart()
-
-        red.observeForever(seekerObserver)
-        green.observeForever(seekerObserver)
-        blue.observeForever(seekerObserver)
-    }
-
-    override fun onStop() {
-        super.onStop()
-
-        red.removeObserver(seekerObserver)
-        green.removeObserver(seekerObserver)
-        blue.removeObserver(seekerObserver)
-    }
-
-    override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-        when(seekBar) {
-            seekRed -> red.postValue(progress)
-            seekGreen -> green.postValue(progress)
-            seekBlue -> blue.postValue(progress)
-        }
-    }
-
-    override fun onStartTrackingTouch(seekBar: SeekBar?) {
-
-    }
-    override fun onStopTrackingTouch(seekBar: SeekBar?) {
-
+    fun complete(){
+        customer.color = binding.pickedColor?.color ?: customer.color
+        dismiss()
     }
 }
