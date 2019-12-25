@@ -3,6 +3,7 @@ package com.rynkbit.coffeebank.ui.preference.customer
 import android.app.AlertDialog
 import android.content.Context
 import android.os.Bundle
+import android.view.WindowManager
 import android.widget.Button
 import android.widget.EditText
 import androidx.lifecycle.LiveData
@@ -38,5 +39,10 @@ class CreateCustomerDialog(context: Context?) : AlertDialog(context) {
                 ))
             dismiss()
         }
+
+        window?.clearFlags(
+            WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
+                    or WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM
+        )
     }
 }

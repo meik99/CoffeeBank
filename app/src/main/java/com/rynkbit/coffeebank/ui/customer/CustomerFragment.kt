@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
@@ -93,11 +92,6 @@ class CustomerFragment : Fragment() {
                 }
                 dialog.create()
                 dialog.show()
-
-                dialog.window?.clearFlags(
-                    WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
-                            or WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM
-                )
             }
         }
     }

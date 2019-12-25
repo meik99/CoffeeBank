@@ -3,6 +3,7 @@ package com.rynkbit.coffeebank.ui.preference.product
 import android.app.AlertDialog
 import android.content.Context
 import android.os.Bundle
+import android.view.WindowManager
 import com.rynkbit.coffeebank.R
 import com.rynkbit.coffeebank.db.database.AppDatabase
 import com.rynkbit.coffeebank.db.entitiy.Product
@@ -14,12 +15,6 @@ class CreateProductDialog(context: Context?) : AlertDialog(context) {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.dialog_add_product)
-
-//        val editName: EditText = findViewById(R.id.editName)
-//        val editPrice: EditText = findViewById(R.id.editPrice)
-//        val editStock: EditText = findViewById(R.id.editStock)
-//        val btnCancel: Button = findViewById(R.id.btnCancel)
-//        val btnSave: Button = findViewById(R.id.btnSave)
 
         btnCancel.setOnClickListener { dismiss() }
         btnSave.setOnClickListener {
@@ -33,5 +28,10 @@ class CreateProductDialog(context: Context?) : AlertDialog(context) {
                 .blockingGet()
             dismiss()
         }
+
+        window?.clearFlags(
+            WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
+                    or WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM
+        )
     }
 }

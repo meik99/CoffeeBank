@@ -7,8 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.rynkbit.coffeebank.R
 import com.rynkbit.coffeebank.db.entitiy.Customer
-import java.math.BigDecimal
-import java.math.RoundingMode
+import com.rynkbit.coffeebank.logic.formatter.DecimalFormatter
 import java.text.NumberFormat
 import java.util.*
 
@@ -37,16 +36,15 @@ class CustomerAdapter : RecyclerView.Adapter<CustomerAdapter.ViewHolder>() {
         val numberFormat = NumberFormat
             .getNumberInstance(Locale.getDefault())
         numberFormat.minimumFractionDigits = 2
+        val customer = customers[position]
 
-        holder.txtFirstname.text = customers[position].firstname
-        holder.txtLastname.text = customers[position].lastname
-        holder.txtBalance.text =
-            numberFormat
-                .format(BigDecimal(customers[position].balance)
-                    .setScale(2, RoundingMode.HALF_UP))
+        holder.txtFirstname.text = customer.firstname
+        holder.txtLastname.text = customer.lastname
+        holder.txtBalance.text = DecimalFormatter().format(customer.balance)
+        holder.itemView.setBackgroundColor(customer.color)
 
         holder.itemView.setOnClickListener {
-            onClickListener?.invoke(customers[position])
+            onClickListener?.invoke(customer)
         }
     }
 

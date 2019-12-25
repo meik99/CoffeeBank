@@ -3,6 +3,7 @@ package com.rynkbit.coffeebank.ui.customer
 import android.app.AlertDialog
 import android.content.Context
 import android.os.Bundle
+import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import androidx.preference.PreferenceManager
 import com.rynkbit.coffeebank.R
@@ -37,6 +38,11 @@ class PasswordDialog(context: Context) : AlertDialog(context) {
                 context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             methodManager.showSoftInput(editPassword, InputMethodManager.SHOW_IMPLICIT)
         }
+
+        window?.clearFlags(
+            WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
+                    or WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM
+        )
     }
 
 }
