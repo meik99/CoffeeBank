@@ -38,4 +38,7 @@
     <string name="set_admin_password">Adminpasswort für diesen Bereich setzen</string>
     <string name="stock">Verfügbar</string>
     <string name="transactions">Transaktionen</string>
+    <string name="rgb_blue">Blau %1$d</string>
+    <string name="rgb_green">Grün %1$d</string>
+    <string name="rgb_red">Rot %1$d</string>
 </resources>

@@ -6,8 +6,8 @@ import androidx.room.PrimaryKey
 
 @Entity
 class Product(
-    @PrimaryKey(autoGenerate = true) val uid: Int = 0,
-    @ColumnInfo(name = "name") val name: String? = null,
-    @ColumnInfo(name = "price") val price: Double = 0.0,
-    @ColumnInfo(name = "stock") val stock: Int = 0
+    @PrimaryKey(autoGenerate = true) var uid: Long = 0,
+    @ColumnInfo(name = "name") var name: String? = null,
+    @ColumnInfo(name = "price") var price: Double = 0.0,
+    @ColumnInfo(name = "stock") var stock: Int = 0
 )

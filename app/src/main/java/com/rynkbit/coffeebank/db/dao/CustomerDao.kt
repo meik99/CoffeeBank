@@ -12,14 +12,13 @@ interface CustomerDao {
     fun getAll(limit: Int, offset: Int): Maybe<List<Customer>>
 
     @Query("SELECT * FROM customer WHERE uid = :id")
-    fun getById(id: Int): Single<Customer>
+    fun getById(id: Long): Single<Customer>
 
     @Update
     fun update(customer: Customer): Single<Unit>
 
     @Insert
-    fun insert(customer: Customer): Single<Unit>
-
+    fun insert(customer: Customer): Single<Long>
 
     @Insert
     fun insertAll(vararg customer: Customer): Single<Unit>

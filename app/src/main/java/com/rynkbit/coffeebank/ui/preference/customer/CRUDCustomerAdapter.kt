@@ -27,7 +27,11 @@ class CRUDCustomerAdapter : RecyclerView.Adapter<CRUDCustomerAdapter.ViewHolder>
         val btnRemove: Button = itemView.findViewById(R.id.btnRemove)
     }
 
-    private var customers = listOf<Customer>()
+    var customers = listOf<Customer>()
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+        }
     
     var onCustomerChange: ((Customer) -> Unit)? = null
     var onCustomerDelete: ((Customer) -> Unit)? = null
@@ -123,10 +127,5 @@ class CRUDCustomerAdapter : RecyclerView.Adapter<CRUDCustomerAdapter.ViewHolder>
                     )
                 )
             }
-    }
-
-    fun updateCustomers(customers: List<Customer>) {
-        this.customers = customers
-        notifyDataSetChanged()
     }
 }

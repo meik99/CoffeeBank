@@ -12,7 +12,7 @@ interface ProductDao{
     fun getAll(limit: Int, offset: Int): Maybe<List<Product>>
 
     @Query("SELECT * FROM product WHERE uid = :id")
-    fun getById(id: Int): Single<Product>
+    fun getById(id: Long): Single<Product>
 
     @Update
     fun update(product: Product): Single<Unit>

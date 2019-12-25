@@ -11,7 +11,7 @@ import com.rynkbit.coffeebank.db.entitiy.Customer
 import com.rynkbit.coffeebank.db.entitiy.Product
 import com.rynkbit.coffeebank.db.entitiy.Transaction
 
-@Database(entities = [Customer::class, Product::class, Transaction::class], version = 1)
+@Database(entities = [Customer::class, Product::class, Transaction::class], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun customerDao(): CustomerDao
     abstract fun productDao(): ProductDao

@@ -7,6 +7,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 
 import com.rynkbit.coffeebank.R
@@ -24,6 +27,7 @@ import kotlinx.android.synthetic.main.fragment_customer.listCustomer
 class CRUDCustomerFragment : Fragment() {
 
     lateinit var crudCustomerAdapter: CRUDCustomerAdapter
+    lateinit var viewmodel: CRUDCustomerViewmodel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,55 +40,50 @@ class CRUDCustomerFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        setupViewmodel()
         setupCustomerAdapter()
         setupCustomerList()
         setupAddButton()
     }
 
+    private fun setupViewmodel() {
+        val factory = CRUDCustomerViewmodelFactoy(
+            CustomerFacade(
+                AppDatabase.getInstance(context!!)
+            )
+        )
+        viewmodel =
+            ViewModelProviders.of(this, factory)[CRUDCustomerViewmodel::class.java]
+    }
+
     private fun setupCustomerAdapter() {
         crudCustomerAdapter = CRUDCustomerAdapter()
-        crudCustomerAdapter.onCustomerChange =
-            CustomerFacade(AppDatabase.getInstance(context!!))
-                .updateFun()
-        crudCustomerAdapter.onCustomerDelete = {
-            CustomerFacade(AppDatabase.getInstance(context!!))
-                .delete(it)
-                .subscribe { t1, t2 ->
-                    updateCustomerList()
-                }
+        crudCustomerAdapter.onCustomerChange = {
+            viewmodel.updateCustomer(it)
         }
+        crudCustomerAdapter.onCustomerDelete = {
+            viewmodel.deleteCustomer(it)
+        }
+
+        viewmodel
+            .customers
+            .observe(this, Observer {
+                crudCustomerAdapter.customers = it
+            })
     }
 
     private fun setupAddButton() {
         fabAdd.setOnClickListener {
             val dialog = CreateCustomerDialog(context)
             dialog.setTitle(R.string.add_customer)
-            dialog.setOnDismissListener { updateCustomerList() }
             dialog.show()
+            dialog.customer.observe(this, Observer {
+                viewmodel.addCustomer(it)
+            })
         }
     }
 
-
-    override fun onResume() {
-        super.onResume()
-
-        updateCustomerList()
-    }
-
-    private fun updateCustomerList(){
-        CustomerFacade(AppDatabase.getInstance(context!!))
-            .getAll(2000, 0)
-            .map {
-                activity?.runOnUiThread {
-                    crudCustomerAdapter.updateCustomers(it)
-                }
-            }
-            .subscribe()
-    }
-
     private fun setupCustomerList() {
-        listCustomer.layoutManager =
-            LinearLayoutManager(context!!, LinearLayoutManager.VERTICAL, false)
         listCustomer.adapter = crudCustomerAdapter
     }
 }

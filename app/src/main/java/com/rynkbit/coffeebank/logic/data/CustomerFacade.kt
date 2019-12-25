@@ -62,7 +62,7 @@ class CustomerFacade(
             .subscribeOn(Schedulers.newThread())
     }
 
-    fun insert(customer: Customer): Single<Unit> {
+    fun insert(customer: Customer): Single<Long> {
         return appDatabase
             .customerDao()
             .insert(customer)
@@ -80,6 +80,13 @@ class CustomerFacade(
         return appDatabase
             .customerDao()
             .deleteAll()
+            .subscribeOn(Schedulers.newThread())
+    }
+
+    fun update(customer: Customer): Single<Unit> {
+        return appDatabase
+            .customerDao()
+            .update(customer)
             .subscribeOn(Schedulers.newThread())
     }
 }

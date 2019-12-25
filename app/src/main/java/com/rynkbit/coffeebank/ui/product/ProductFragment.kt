@@ -68,10 +68,10 @@ class ProductFragment : Fragment() {
         AlertDialog.Builder(context)
             .setTitle(R.string.buy)
             .setMessage(getString(R.string.buy_product, product.name))
-            .setPositiveButton(android.R.string.ok) { dialog, _ ->
+            .setPositiveButton(android.R.string.ok) { _, _ ->
                 TransactionFacade(AppDatabase.getInstance(context!!))
                     .buy(customerProductViewModel.customer!!, product)
-                    .subscribe { t1, t2 ->
+                    .subscribe { _, _ ->
                         Navigation.findNavController(activity!!, R.id.navhost)
                             .popBackStack()
                     }

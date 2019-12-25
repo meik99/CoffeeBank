@@ -44,4 +44,7 @@
     <string name="date">Date</string>
     <string name="confirm_transaction_delete">Delete transaction of %1$s %2$s for %3$s?</string>
     <string name="error_reading_backup">Error reading backup</string>
+    <string name="rgb_red">Red %1$d</string>
+    <string name="rgb_green">Green %1$d</string>
+    <string name="rgb_blue">Blue %1$d</string>
 </resources>

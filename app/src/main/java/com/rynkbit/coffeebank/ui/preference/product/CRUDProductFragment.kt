@@ -53,7 +53,7 @@ class CRUDProductFragment : Fragment() {
         crudProductAdapter.onProductDelete = {
             ProductFacade(AppDatabase.getInstance(context!!))
                 .delete(it)
-                .subscribe { t1, t2 ->
+                .subscribe { _, _ ->
                     updateProductList()
                 }
         }
