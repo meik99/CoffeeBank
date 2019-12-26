@@ -47,8 +47,8 @@ class CRUDCustomerFragment : Fragment() {
             val customer = Customer()
             val dialog = ColorPickerDialog(context!!, customer)
             dialog.show()
-            dialog.setOnDismissListener {
-                viewmodel.equalizeColor(customer)
+            dialog.onColorSelected = {
+                viewmodel.equalizeColor(it)
             }
         }
     }

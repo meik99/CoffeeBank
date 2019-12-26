@@ -14,6 +14,8 @@ class ColorPickerDialog(
 ) : AlertDialog(context){
     private lateinit var binding: DialogColorPickerBinding
 
+    var onColorSelected: ((Customer) -> Unit)? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -25,18 +27,11 @@ class ColorPickerDialog(
         setTitle(R.string.color)
 
         binding.executePendingBindings()
-
-
-
-//        binding.btnCancel.setOnClickListener { dismiss() }
-//        binding.btnOk.setOnClickListener {
-//            customer.color = binding.pickedColor.color
-//            dismiss()
-//        }
     }
 
     fun complete(){
         customer.color = binding.pickedColor?.color ?: customer.color
+        onColorSelected?.invoke(customer)
         dismiss()
     }
 }
